@@ -1,0 +1,47 @@
+#include "iostream"
+#include "bits/stdc++.h"
+#define fast ios_base::sync_with_stdio(0), cin.tie(0),cout.tie(0);
+#define ll   long long
+using namespace std;
+
+bool bears(int n)
+{
+    if (n>=42)
+    {
+        if (n==42)
+        {
+            return true;
+        }
+        if(n%5==0)
+        {
+            bears(n-42);
+        }
+        else if (n%2==0)
+        {
+            bears(n/2);
+        }
+        else if (n%4==0 || n%3==0)
+        {
+            bears(n-(n%10)*((n%100)-10));
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+      return false;
+    }
+};
+int main() {
+    int n;
+    cout<<"enter no. of bears: ";
+    cin>>n;
+    if (bears(n))
+    {
+        cout<<"\n"<<"Congrats you have won!";
+    }
+    else
+        cout<<"\nSadly you have lost";
+}
