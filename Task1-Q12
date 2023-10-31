@@ -1,21 +1,23 @@
 #include <iostream>
 #include <fstream>
 #include <bits/stdc++.h>
+# define ll long long
 using namespace std;
 int main(){
     vector<string>words ={"new","urgent","have to","expenses","payment",        // words detected
-                            "alert","Apple","NBK","Netflix","Yahoo","Microsoft",
-                            "Chase","Paypal","Facebook","WhatsApp","eBay","Amazon",
-                            "leaked","invoice","copy","file","message","required",
-                            "scanned","suspicious"};
+                          "alert","Apple","NBK","Netflix","Yahoo","Microsoft",
+                          "Chase","Paypal","Facebook","WhatsApp","eBay","Amazon",
+                          "leaked","invoice","copy","file","message","required",
+                          "scanned","suspicious"};
 
     vector<string>phrases = {"password expired","your account has been hacked",      // phrases detected
-                            "your account has been limited","access failed","verify your information"};
+                             "your account has been limited","access failed","verify your information"};
 
     vector <int> nums = {1,2,1,3,3,2,3,3,2,2,2,2,3,2,2,1,1,3,3,3,1,2,1,3,3,1,1,3,3,2};   // score of each word or phrase
 
     vector <pair<string , int>>lest;     // holds the word and the initialed score
     vector <pair<string , int>>seeker;  // holds the word and num of repeatance
+    ll final_score =0;
     for (int i = 0; i < 30; i++)
     {
         if (i<25)
@@ -29,7 +31,7 @@ int main(){
             seeker.push_back(make_pair(phrases[i-25],0));
         }
     }
-    
+
     string word,filename,temp;
     cout<<"enter your destined file name : \n";
     cin>>filename;
@@ -41,7 +43,7 @@ int main(){
     {
         cout<<"error while opening the file";
     }
-    else 
+    else
     {
         while (getline(file,word))
         {
@@ -52,7 +54,7 @@ int main(){
                     it.second+=1;
                 }
             }
-            
+
         }
         for ( auto it : seeker)
         {
@@ -62,13 +64,16 @@ int main(){
                 {
                     if (it.first==itr.first)
                     {
-                        cout<<it.first<<" has a score of "<<it.second*itr.second<<"\n";
+                        cout<<it.first<<" has a threat rate of "<<itr.second<<" repeated "<<it.second<< " times and"<<
+                        " has a score of : "<<it.second*itr.second<<"\n";
+                        final_score+=itr.second*it.second;
                     }
                 }
             }
         }
+        cout<<"the total score is : "<<final_score;
         file.close();
-        
+
     }
 
 
