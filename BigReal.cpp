@@ -15,7 +15,9 @@ class BigReal
         }
         void validation();
         string operator +(BigReal&bigreal);
+        string operator-(BigReal&bigreal);
         ostream  operator <<(ostream& output);        
+
 friend ostream & operator <<(ostream &output ,BigReal &bireal);
 };
 void BigReal::validation()
@@ -75,6 +77,8 @@ string BigReal::operator+(BigReal&bigreal)
     string frac2=fraction;
     int frac_siz1=bigreal.fraction.size();
     int frac_siz2=fraction.size();
+    if(sign==bigreal.sign)
+    {
     if(int_size1>int_size2)
     {
         int dif=int_size1-int_size2;
@@ -167,19 +171,116 @@ string BigReal::operator+(BigReal&bigreal)
         pls=0;
     }reverse(result_int.begin(),result_int.end());
     
-    string final_res=result_int+'.'+result_frac;
-    return final_res;   
+    string final_res=sign+result_int+'.'+result_frac;
+        return final_res;
+    }
+    else
+    {
+
+
+    }
 }
+string BigReal::operator-(BigReal&bigreal)
+{
+    string int_s1=bigreal.integr;
+    string int_s2=integr;
+    int int_size1=bigreal.integr.size();
+    int int_size2=integr.size();
+    string frac1=bigreal.fraction;
+    string frac2=fraction;
+    int frac_siz1=bigreal.fraction.size();
+    int frac_siz2=fraction.size();
+    string big_int;
+    string big_frac;
+    string little_frac;
+    string little_int;
+    string finl_res;
+    int f=0;
+    if(int_size1>int_size2)
+    {
+        int dif=int_size1-int_size2;
+        string trans;
+        for(int i=0;i<dif;i++)
+        {
+            trans+='0';
+        }int_s2=trans+int_s2;
+    }
+    else if(int_size1<int_size2)
+    {
+        int dif=int_size2-int_size1;
+        string trans;
+        for(int i=0;i<dif;i++)
+        {
+            trans+='0';
+        }int_s1=trans+int_s1;
+    }
+    for(int i=0;i<int_size1;i++)
+    {
+        if(int_s1[i]>int_s2[i])
+        {
+            f=1;
+            big_int=int_s1;
+            big_frac=frac1;
+            little_int=int_s2;
+            little_frac=frac2;
+            break;
+        }else if(int_s1[i]<int_s2[i])
+        {
+            f=1;
+            big_int=int_s2;
+            big_frac=frac2;
+            little_int=int_s1;
+            little_frac=frac1;
+            break;
+        }else
+        {
+            continue;
+        }   
+    }
+    if(f==0)
+    {
+        for(int i=0;i<frac_siz1;i++)
+        {
+            if(frac1[i]>frac2[i])
+            {
+                f=1;
+                big_int=int_s1;
+                big_frac=frac1;
+                little_int=int_s2;
+                little_frac=frac2;
+                break;
+            }else if(frac1[i]<frac2[i])
+            {
+                f=1;
+                big_int=int_s2;
+                big_frac=frac2;
+                little_int=int_s1;
+                little_frac=frac1;
+                break;
+            }else
+            {
+                continue;
+            }
+        }
+    }
+    if(f==0)
+    {
+        finl_res="0";
+        return finl_res;
+    }
+    
+
+
+
+
+}
+
 int main()
 {
-    // string s1;
-    // string s2;
-    // cin>>s1>>s2;
-    BigReal br("554565.1234");
-    BigReal b("+586.90156");
+    BigReal br("-554565.1234");
+    BigReal b("-586.90156");
     b.validation();
     br.validation();
-    cout<<br<<endl<<b;
 
 
     return 0;
