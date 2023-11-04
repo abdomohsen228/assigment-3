@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <sstream>
+
+using namespace std;
+
+vector<string> split(const string &target, char delimiter) {
+    vector<string> result;
+    istringstream iss(target);
+    string token;
+
+    while (getline(iss, token, delimiter))
+        result.push_back(token);
+
+    return result;
+}
+
+int main() {
+    string input1;
+    char delimiter;
+
+    cout << "Enter the first string to split: ";
+    getline(cin, input1);
+
+    cout << "Enter the delimiter: ";
+    cin >> delimiter;
+
+    vector<string> result1 = split(input1, delimiter);
+
+    cout << endl;
+    for (const auto& str : result1) {
+        cout << str << endl;
+    }
+
+    return 0;
+}
