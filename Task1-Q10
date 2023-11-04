@@ -4,14 +4,17 @@
 #include <locale>
 using namespace std;
 int main(){
-    string filename;
+    string filename,altfile,ansfile;
     cout<<"enter your file name : \n";
     cin>>filename;
+    cout<<"enter your detected words and their alternatives file: \n";
+    cin>>altfile;
+    altfile+=".txt";
     filename+=".txt";
     wifstream file(filename);
-    wifstream alt("alternatives.txt");
-    wofstream temp ("temp.txt", ios ::trunc );
-    wofstream temp2 ("temp2.txt", ios::trunc);
+    wifstream alt(altfile);
+    wofstream temp ("ans.txt", ios ::trunc );
+//    wofstream temp2 ("temp2.txt", ios::trunc);
     file.imbue(locale(file.getloc(), new std::codecvt_utf8<wchar_t>));
     alt.imbue(locale(alt.getloc(), new std::codecvt_utf8<wchar_t>));
     temp.imbue(locale(temp.getloc(), new std::codecvt_utf8<wchar_t>));
@@ -36,9 +39,9 @@ int main(){
                         {
                             if (i + detect.size() < word.size())     // to not exceed the space using the substr fn
                             {
-                                    alt >> sub;   // even indexed words are the subs
-                                    word.insert(i, sub);
-                                    word.erase(i + sub.size(), detect.size());
+                                alt >> sub;   // even indexed words are the subs
+                                word.insert(i, sub);
+                                word.erase(i + sub.size(), detect.size());
                             }
                         }
                     }
@@ -48,11 +51,11 @@ int main(){
                     alt >> detect;  // to move to odd indexed word which is a detected word
                 }
             }
-              alt.clear();   // restarting reading from the beginning of the file
-              alt.seekg(0,ios::beg);
-              temp << word << "\n";   // typing down the edited string to the new file
+            alt.clear();   // restarting reading from the beginning of the file
+            alt.seekg(0,ios::beg);
+            temp << word << "\n";   // typing down the edited string to the new file
         }
-        cout<< "check your temp.txt file. ";
+        cout<< "check your ans.txt file. ";
         // if (checkpoints.size()>0)
         // {
         // }
