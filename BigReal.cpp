@@ -79,9 +79,7 @@ string BigReal::operator+(BigReal&bigreal)  // making both numbers the same size
     string frac2=fraction;
     int frac_siz1=bigreal.fraction.size();
     int frac_siz2=fraction.size();
-    if(sign==bigreal.sign)
-    {
-        if(int_size1>int_size2)
+     if(int_size1>int_size2)
         {
         int dif=int_size1-int_size2;
         string trans;  //garb ?
@@ -117,6 +115,8 @@ string BigReal::operator+(BigReal&bigreal)  // making both numbers the same size
                 trans+='0';
             }frac1=frac1+trans;
         }
+    if(sign==bigreal.sign)
+    {
         string result_frac;
         int pls=0;
         int carry=0;
@@ -179,6 +179,7 @@ string BigReal::operator+(BigReal&bigreal)  // making both numbers the same size
         return final_res;
     }
     else{    
+       // cout<<int_s2<<endl;
         string big_int;
         string big_frac;
         char big_sign;
@@ -697,13 +698,13 @@ bool BigReal::operator<(BigReal &bigreal)
 }
 int main()
 {
-    BigReal b("-5");
-    BigReal br("10"); 
+    BigReal b("10");
+    BigReal br("-9"); 
     br.validation();
     b.validation();
     cout<<b-br;//+17
     cout<<endl;
-    cout<<br-b;//-17
+    cout<<br+b;//-17
     // cout<<br<<endl;
     // cout<<b;
     return 0;
