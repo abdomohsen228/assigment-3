@@ -392,7 +392,8 @@ string BigReal::operator-(BigReal&bigreal) {
 
     }
     else
-    {
+    {// -7- -10 =3 -10- -7=-3
+
         string big_int;
         string big_frac;
         char big_sign;
@@ -404,7 +405,8 @@ string BigReal::operator-(BigReal&bigreal) {
                 f = 1;
                 big_int = int_s1;
                 big_frac = frac1;
-                big_sign='+';
+                if(sign=='-')big_sign='-';
+                else big_sign='+';
                 little_int = int_s2;
                 little_frac = frac2;
                 break;
@@ -412,7 +414,8 @@ string BigReal::operator-(BigReal&bigreal) {
                 f = 1;
                 big_int = int_s2;
                 big_frac = frac2;
-                big_sign='-';
+                if(sign=='-')big_sign='+';
+                else big_sign='-';
                 little_int = int_s1;
                 little_frac = frac1;
                 break;
@@ -698,8 +701,8 @@ bool BigReal::operator<(BigReal &bigreal)
 }
 int main()
 {
-    BigReal b("10");
-    BigReal br("-9"); 
+    BigReal b("-7");
+    BigReal br("-10"); 
     br.validation();
     b.validation();
     cout<<b-br;//+17
