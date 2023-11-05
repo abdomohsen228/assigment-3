@@ -22,10 +22,7 @@ class BigReal
         ostream  operator <<(ostream& output);
 friend ostream & operator <<(ostream &output ,BigReal &bigreal);
 };
-
 //---------------------------------- validation
-
-
 void BigReal::validation()
 {
     if(regex_match(real_number,regex("[+-]?\\d*.?\\d+")))
@@ -67,16 +64,11 @@ void BigReal::validation()
         real_number="000";
     }
 }
-
 ostream & operator <<(ostream& output ,BigReal &bigreal)
 {
     output<<bigreal.sign<<" "<<bigreal.integr<<" . "<<bigreal.fraction;
 }
-
-
 //------------------------------------------- operator '+' overloading
-
-
 string BigReal::operator+(BigReal&bigreal)  // making both numbers the same size
 {
     string int_s1=bigreal.integr;
@@ -291,11 +283,7 @@ string BigReal::operator+(BigReal&bigreal)  // making both numbers the same size
 
  
 };
-
-
 //-------------------------------------------- operator '-' overloading
-
-
 string BigReal::operator-(BigReal&bigreal) {
     string int_s2 = bigreal.integr;
     string int_s1 = integr;
@@ -338,7 +326,6 @@ string BigReal::operator-(BigReal&bigreal) {
                 trans+='0';
             }frac1=frac1+trans;
         }
-
     if(sign!=bigreal.sign)// iverse operator to +
     {
         string result_frac;
@@ -416,7 +403,7 @@ string BigReal::operator-(BigReal&bigreal) {
                 f = 1;
                 big_int = int_s1;
                 big_frac = frac1;
-                big_sign=sign;
+                big_sign='+';
                 little_int = int_s2;
                 little_frac = frac2;
                 break;
@@ -424,7 +411,7 @@ string BigReal::operator-(BigReal&bigreal) {
                 f = 1;
                 big_int = int_s2;
                 big_frac = frac2;
-                big_sign='+';
+                big_sign='-';
                 little_int = int_s1;
                 little_frac = frac1;
                 break;
@@ -438,7 +425,7 @@ string BigReal::operator-(BigReal&bigreal) {
                     f = 1;
                     big_int = int_s1;
                     big_frac = frac1;
-                    big_sign=sign;
+                    big_sign='+';
                     little_int = int_s2;
                     little_frac = frac2;
                     break;
@@ -446,7 +433,7 @@ string BigReal::operator-(BigReal&bigreal) {
                     f = 1;
                     big_int = int_s2;
                     big_frac = frac2;
-                    big_sign='+';
+                    big_sign='-';
                     little_int = int_s1;
                     little_frac = frac1;
                     break;
@@ -507,11 +494,7 @@ string BigReal::operator-(BigReal&bigreal) {
         return fin;
     }
 }
-
-
 //------------------------------------- operator '>' overloading
-
-
 bool BigReal::operator>(BigReal &bigreal)
 {
         string int_s2 = bigreal.integr;  // the second object declared in int main
@@ -714,8 +697,8 @@ bool BigReal::operator<(BigReal &bigreal)
 }
 int main()
 {
-    BigReal b("-54321.54321");
-    BigReal br("78.158"); 
+    BigReal b("-5");
+    BigReal br("10"); 
     br.validation();
     b.validation();
     cout<<b-br;//+17
