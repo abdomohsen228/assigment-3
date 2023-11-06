@@ -179,12 +179,14 @@ string BigReal::operator+(BigReal&bigreal)  // making both numbers the same size
         return final_res;
     }
     else{    
-       // cout<<int_s2<<endl;
-        string big_int;
-        string big_frac;
+    //    cout<<int_s1<<endl;
+    //    cout<<frac1<<endl;
+
+        string big_int="";
+        string big_frac="";
         char big_sign;
-        string little_frac;
-        string little_int;
+        string little_frac="";
+        string little_int="";
         int f = 0;
         for (int i = 0; i < int_size1; i++) {  // determining which is bigger
             if (int_s1[i] > int_s2[i]) {
@@ -276,8 +278,7 @@ string BigReal::operator+(BigReal&bigreal)  // making both numbers the same size
                 char chr=x+'0';
                 res2.push_back(chr);
             }
-            reverse(res2.begin(),res2.end());
-        }
+        }reverse(res2.begin(),res2.end());
         string fin=big_sign+res2+'.'+res_mins;
         return fin;
     }
@@ -393,6 +394,8 @@ string BigReal::operator-(BigReal&bigreal) {
     }
     else
     {// -7- -10 =3 -10- -7=-3
+        // cout<<int_s1<<endl;
+        // cout<<int_s2<<endl;
 
         string big_int;
         string big_frac;
@@ -492,8 +495,8 @@ string BigReal::operator-(BigReal&bigreal) {
                 char chr=x+'0';
                 res2.push_back(chr);
             }
-            reverse(res2.begin(),res2.end());
-        }
+            
+        }reverse(res2.begin(),res2.end());
         string fin=big_sign+res2+'.'+res_mins;
         return fin;
     }
@@ -701,13 +704,13 @@ bool BigReal::operator<(BigReal &bigreal)
 }
 int main()
 {
-    BigReal b("-7");
-    BigReal br("-10"); 
+    BigReal b("50");
+    BigReal br("100"); 
     br.validation();
     b.validation();
-    cout<<b-br;//+17
-    cout<<endl;
-    cout<<br+b;//-17
+    // cout<<br-b;//+17
+    // cout<<endl;
+    cout<<b-br;//-17
     // cout<<br<<endl;
     // cout<<b;
     return 0;
