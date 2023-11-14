@@ -86,6 +86,7 @@ private:
     string inst;
     string counter;
     char op;
+    int xm;
     vector<pair<string,string>>hidden_memo;
 public:
     excution(ALU&alu,main_memory&memo)
@@ -96,7 +97,12 @@ public:
     void run(int&);
     void dis()  // displaying the register
     {
+        cout<<"     *RIGISTER*       "<<endl;
         for(auto it:gistr){
+            cout<<it.first<<" "<<it.second<<endl;
+        }
+        cout<<"     *MAIN MEMORY*      "<<endl;
+        for(auto it:hidden_memo){
             cout<<it.first<<" "<<it.second<<endl;
         }
     }
@@ -104,6 +110,7 @@ public:
 };
 void excution::run(int& xx)
 {
+    xm=xx;
 //    counter=hidden_memo[xx].first;
     inst=(hidden_memo[xx].second+hidden_memo[xx+1].second);  // the address
     op=inst[0];
@@ -273,13 +280,35 @@ int main()
         main_memory mn(file);
         ALU al;
         excution ex(al,mn);
-        // ex.run(0);
-
         for(int i=0;i<mn.base_programe.size();i++)
         {
             ex.run(i);
         }
-
+    }
+    else if(choise==2)
+    {
+        cout<<"Enter the step number "<<endl;
+        int stp;
+        cin>>stp;
+        main_memory mn(file);
+        ALU al;
+        excution ex(al,mn);
+        for(int i=0;i<mn.base_programe.size();i++)
+        {
+            ex.run(i);
+            if(i==stp)break;
+        }ex.dis();
+    }
+    else if(choise==3)
+    {
+        main_memory mn(file);
+        ALU al;
+        excution ex(al,mn);
+        for(int i=0;i<mn.base_programe.size();i++)
+        {
+            ex.run(i);
+            if(i==mn.base_programe.size()-2)break;
+        }
         ex.dis();
     }
 }
