@@ -6,58 +6,69 @@ using namespace std;
 class main_memory
 {
 public:
-    vector<pair<string,string>>base_programe;
+    vector<pair<string,string>>base_programe;  // {(address , op ) , (address , address)}
     main_memory(vector<string>&insrtuction)
     {
         int b=insrtuction.size();
         int z=0;
         base_programe.resize(32);
-        char arr[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        char arr[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'}; // creating address
         for(int i=0;i<16;i++)
         {
-            for(int j=0;j<16;j++)
+            for(int j=0;j<16;j++)  // 16 for HEXA limit
             {
                 string s;
                 s.push_back(arr[i]);
                 s.push_back(arr[j]);
                 if(z<=insrtuction.size()-1)
-                    base_programe.push_back({s,insrtuction[z]});
+                    base_programe.push_back(make_pair(s,insrtuction[z]));  // 00 14  , 01 A3
                 else
                 {
-                    base_programe.push_back({s,"00"});
-                }z++;
+                    base_programe.push_back({s,"00"});  // 03 00 ....... FF 00
+                }
+                z++;
             }
         }
-            base_programe.erase(
-            remove_if(base_programe.begin(), base_programe.end(),
-                [](const pair<string, string>& element) { return element.first.empty(); }),
-            base_programe.end());
+        base_programe.erase(
+                remove_if(base_programe.begin(), base_programe.end(),
+                          [](const pair<string, string>& element) { return element.first.empty(); }),
+                base_programe.end());  // deletes any element in vector that has an empty .first in its pair
     }
-        void get_res();
+    void get_res();
 
 };
-    void main_memory::get_res()
-    {
-   
-        for(auto it :base_programe)
-        {
-            cout<<it.first<<" "<<it.second<<endl;;
-        }
-    }  
-class ALU 
+void main_memory::get_res()
 {
-    public:
+
+    for(auto it :base_programe)
+    {
+        cout<<it.first<<" "<<it.second<<endl;;
+    }
+}
+class ALU
+{
+public:
     vector<pair<string ,string>>registr;
     vector<string>count;
+    vector<pair<int,string>>move;
     ALU()
     {
+        int o=0;
+        move.resize(256);
         char arr[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-        registr.resize(16);
+        registr.resize(16);  // assigning registers with an initial value of 00
         for(int i=0;i<16;i++)
         {
             registr[i].first.push_back('0');
             registr[i].first.push_back(arr[i]);
             registr[i].second="00";
+            for (int j = 0; j < 16; ++j) 
+            {
+                move[o].second.push_back(arr[i]);
+                move[o].second.push_back(arr[j]);
+                move[o].first=o;
+                o++;
+            }
         }
     }
     void st_re()
@@ -66,58 +77,174 @@ class ALU
         {
             cout<<registr[i].first<<" "<<registr[i].second<<endl;
         }
-    }  
+    }
 };
-class excution
+class excution :public ALU
 {
-    private:
-        vector<pair<string ,string>>gistr;
-        string inst;
-        string counter;
-        char op;
-        vector<pair<string,string>>hidden_memo;
-    public:
-        excution(ALU&alu,main_memory&memo)
-        {
-            hidden_memo=memo.base_programe;
-            gistr=alu.registr;
-        }
-        void run(int);
-        void dis()
-        {
-            for(auto it:gistr){
-                cout<<it.first<<" "<<it.second<<endl;
-            }
-        }
-        
-};
-    void excution::run(int xx)
+private:
+    vector<pair<string ,string>>gistr;
+    string inst;
+    string counter;
+    char op;
+    vector<pair<string,string>>hidden_memo;
+public:
+    excution(ALU&alu,main_memory&memo)
     {
-        counter=hidden_memo[xx].first;
-        inst=(hidden_memo[xx].second+hidden_memo[xx+1].second);
-        op=inst[0];
-        if(op=='1')
+        hidden_memo=memo.base_programe;  // -> {(address , op & register) , ( address , address)}
+        gistr=alu.registr; // 00 00 , 01 00 ...... FF 00
+    }
+    void run(int&);
+    void dis()  // displaying the register
+    {
+        for(auto it:gistr){
+            cout<<it.first<<" "<<it.second<<endl;
+        }
+    }
+
+};
+void excution::run(int& xx)
+{
+//    counter=hidden_memo[xx].first;
+    inst=(hidden_memo[xx].second+hidden_memo[xx+1].second);  // the address
+    op=inst[0];
+    // for (auto &it:move)  // 
+    // {
+    //     if (it.second==hidden_memo[xx+1].second)   // counter , address
+    //     {
+    //         it.first=xx;
+    //     }
+    // }
+    if(op=='1')  // load the given register with the value of the given address
+    {
+        string s;
+        string add;
+        add.push_back(inst[2]);
+        add.push_back(inst[3]);
+        for (const auto& it : hidden_memo)//fecth
         {
-            string s;
-            string add;
-            add.push_back(inst[2]);
-            add.push_back(inst[3]);
-            for (const auto& it : hidden_memo)//fecth
+            if(it.first==add)
             {
-                if(it.first==add)
-                {
-                    s=it.second;
-                }
+                s=it.second;  // getting the value of the address
             }
-            for(auto &i:gistr)
+        }
+        for(auto &i:gistr)
+        {
+            if(i.first[1]==inst[1])  // loading the value of the chosen register
             {
-                if(i.first[1]==inst[1])
-                {
-                    i.second=s;
+                i.second=s;
+            }
+        }
+    }
+    else if (op=='2')  // load the given register with the address bit pattern
+    {
+        string add;
+        add.push_back(inst[2]);
+        add.push_back(inst[3]);
+        for ( auto &it : gistr)
+        {
+            if (it.first[1]==inst[1])
+            {
+                it.second=add;
+            }
+        }
+    }
+    else if (op=='3')  // store the value of the given register in the given address
+    {
+
+        string add;
+        add.push_back(inst[2]);
+        add.push_back(inst[3]);
+        string content;
+        for (auto it :gistr)
+        {
+            if (it.first[1]==inst[1])
+            {
+                content=it.second;
+            }
+        }
+        if (add=="00")
+        {
+            cout<<content<<"\n";
+        }
+        else
+        {
+            for (auto &it: hidden_memo) {
+                if (it.first == add) {
+                    it.second = content;
                 }
             }
         }
     }
+    else if (op=='4')  // copy the content of the first register in the second register
+    {
+        if (inst[1]!='0')
+        {
+            cout<<"The given instruction: "<<inst<<" is invalid!";
+        }
+        else
+        {
+            string content;
+            string chosen;
+            chosen.push_back(inst[2]);
+            for (auto it :gistr)
+            {
+                if (it.first[1]==chosen[0])
+                {
+                    content=it.second;
+                }
+            }
+            chosen.pop_back();
+            chosen.push_back(inst[3]);
+            for (auto &it: gistr)
+            {
+                if (it.first[1]==chosen[0])
+                {
+                    it.second=content;
+                }
+            }
+        }
+    }
+    else if (op=='B')  // if the given register has the same value as in register zero you jump to the given address inst
+    {
+        string p;
+        p.push_back(inst[1]);
+        if (gistr[stoi(p)]==gistr[0])
+        {
+            string add;
+            add.push_back(inst[2]);
+            add.push_back(inst[3]);
+//            counter=add;
+            // expected endless loop!!
+//            if (gistr[stoi(p)].second=="00" && gistr[0].second=="00")
+//            {
+//                if (add<)
+//                cout<<"error! \nThis instruction: ";
+//            }
+            for (auto it : move)
+            {
+                // cout<<it.second<<"\n";
+                if (it.second==add)
+                {
+                    xx= it.first;
+                    // cout<<xx<<"\n";
+                }
+            }
+            
+        }
+    }
+    else if (op=='C')
+    {
+        if (inst[1]=='0' && inst[2]=='0' && inst[3]=='0')
+        {
+            // return 0;
+            exit;
+        }
+        else
+        {
+            cout<< "the given instruction: "<<inst<<" is invalid!";
+        }
+    }
+}
 
 int main()
 {
@@ -130,28 +257,29 @@ int main()
         string s1;
         s1.push_back(line[0]);
         s1.push_back(line[1]);
-        file.push_back(s1);
+        file.push_back(s1); // -> op , register  ( even idx )
         string s2;
         s2.push_back(line[2]);
         s2.push_back(line[3]);
-        file.push_back(s2);
+        file.push_back(s2);  // -> address  ( odd idx )
     }
     int choise;
-    cout<<"ENTER \n1: load all programe and see output if exist"<<endl;
-    cout<<"2: display Memory,rigster & counter in any steps"<<endl;
+    cout<<"ENTER \n1: load all program and see output if exist"<<endl;
+    cout<<"2: display Memory,register & counter in any steps"<<endl;
     cout<<"3: display memory after terminate"<<endl;
-    cin>>choise; 
+    cin>>choise;
     if(choise==1)
     {
         main_memory mn(file);
         ALU al;
         excution ex(al,mn);
+        // ex.run(0);
+
+        for(int i=0;i<mn.base_programe.size();i++)
+        {
+            ex.run(i);
+        }
+
         ex.dis();
-        ex.run(0);
-        // for(int i=0;i<mn.base_programe.size();i++)
-        // {
-        //     ex.run(i);
-        // }
-        
     }
 }
