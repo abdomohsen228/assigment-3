@@ -3,6 +3,94 @@
 #include <algorithm>
 #include <iostream>
 using namespace std;
+//----------------------
+string answ;
+    string converter(string& hexInput)
+    {
+    string hexDigits = "0123456789ABCDEF";
+    string binaryDigits[] = {
+        "0000", "0001", "0010", "0011",
+        "0100", "0101", "0110", "0111",
+        "1000", "1001", "1010", "1011",
+        "1100","1101","1110","1111"
+    };
+    string binary;
+    string x;
+    string y;
+    for(int i=0;i<hexDigits.size();i++)
+    {
+        if(hexDigits[i]==hexInput[0])
+        {
+            x=binaryDigits[i];
+        }
+        if(hexDigits[i]==hexInput[1])
+        {
+            y=binaryDigits[i];
+        }
+    }
+    binary=x+y;
+    bool carry = true;
+    for (char &bit : binary) {
+        bit = (bit == '0') ? '1' : '0';
+    }
+    for (int i = binary.size() - 1; i >= 0 && carry!=0; --i) {
+        if (binary[i] == '0') {
+            binary[i] = '1';
+            carry = false;
+        } else {
+            binary[i] = '0';
+        }
+    }    
+    return binary;
+    
+}
+bitset<8> adding(string c,string c2)
+{
+    bitset<8> num1(converter(c));
+    bitset<8> num2(converter(c2));
+    bitset<9> sum = num1.to_ulong() + num2.to_ulong();
+    if (sum[8]) {
+        sum = sum.to_ulong() & 0xFF;
+    }
+    bitset<8> ading = static_cast<bitset<8>>(sum.to_ulong());
+    string s=ading.to_string();
+    string x;
+    string y;
+    for(int i=0;i<4;i++)
+    {
+        x.push_back(s[i]);
+    }
+    for(int i=4;i<s.size();i++)
+    {
+        y.push_back(s[i]);
+    }
+    string hexDigits = "0123456789ABCDEF";
+    string binaryDigits[] = {
+        "0000", "0001", "0010", "0011",
+        "0100", "0101", "0110", "0111",
+        "1000", "1001", "1010", "1011",
+        "1100","1101","1110","1111"
+    };
+    string binary;
+    string hex;
+    for(int i=0;i<=15;i++)
+    {
+        if(x==binaryDigits[i])
+        {
+            hex.push_back(hexDigits[i]);
+        }
+    }
+    for(int i=0;i<=15;i++)
+    {
+        if(y==binaryDigits[i])
+        {
+            hex.push_back(hexDigits[i]);
+        }
+    }
+    answ=hex;
+}
+
+//-----------------------
 class main_memory
 {
 public:
@@ -208,6 +296,33 @@ void excution::run(int& xx, int b)
                 {
                     it.second=content;
                 }
+            }
+        }
+    }
+    else if (op=='5')  // take to registers and add their values then store them in the given register
+    {
+        string fir,sec,ans,thrd;
+        string c1,c2,c3,bin1,bin2;
+        thrd.push_back(inst[1]);
+        fir.push_back(inst[2]);
+        sec.push_back(inst[3]);
+        for (auto it : gistr)
+        {
+            if (it.first==fir)
+            {
+                c1=it.second;  // hex address
+            }
+            if (it.first==sec)
+            {
+                c2=it.second;  // hex address
+            }
+        }
+        adding(c1,c2);
+        for (auto &it :gistr)
+        {
+            if(it.first==thrd)
+            {
+                it.second=answ;
             }
         }
     }
