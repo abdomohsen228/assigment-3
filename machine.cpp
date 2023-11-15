@@ -211,6 +211,720 @@ void excution::run(int& xx)
             }
         }
     }
+//     else if (op=='5')  // take to registers and add their values then store them in the given register
+//     {
+//         string fir,sec,ans,thrd;
+//         string c1,c2,c3,bin1,bin2;
+//         thrd.push_back(inst[1]);
+//         fir.push_back(inst[2]);
+//         sec.push_back(inst[3]);
+//         for (auto it : gistr)
+//         {
+//             if (it.first==fir)
+//             {
+//                 c1=it.second;  // hex address
+//             }
+//             if (it.first==sec)
+//             {
+//                 c2=it.second;  // hex address
+//             }
+//         }
+//         cout<<"first of firsts\n";
+//         int a1,a2,a3;
+//         if (c1[0]>='A' && c1[0]<='F')
+//         {
+//             a1=(c1[0]-'0')-55;
+//             a1*=16;
+//             while (a1>0)
+//             {
+//                 a2=a1%2;
+//                 bin1.push_back(char(a2));
+//                 a1/=2;
+//             }
+// //            std::sort(bin1.begin(), bin1.end())
+//             if (c1[1]>='A' && c1[1]<='F')
+//             {
+//                 a1=(c1[1]-'0')-55;
+//                 a1*=16;
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin1.push_back(char(a2));
+//                     a1/=2;
+//                 }
+
+//             }
+//             else
+//             {
+//                 a1=(c1[1]-'0');
+//                 if (a1<8 && a1>3)
+//                 {
+//                     bin1.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin1.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=3 && a1>1)
+//                 {
+//                     bin1.push_back('0');
+//                     bin1.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin1.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=1)
+//                 {
+//                     bin1.push_back('0');
+//                     bin1.push_back('0');
+//                     bin1.push_back('0');
+//                     if (a1>0)
+//                     {
+//                         while (a1>0)
+//                         {
+//                             a2=a1%2;
+//                             bin1.push_back(char(a2));
+//                             a1/=2;
+//                         }
+//                     }
+//                     else
+//                     {
+//                         bin1.push_back('0');
+//                     }
+//                 }
+//                 else
+//                 {
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin1.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//             }
+//             std::sort(bin1.begin(), bin1.end());
+//         }
+//         else
+//         {
+            
+//             a1=(c1[0]-'0');
+//             if (a1<8 && a1>3)
+//             {
+//                 bin1.push_back('0');
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin1.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             else if (a1<=3 && a1>1)
+//             {
+//                 bin1.push_back('0');
+//                 bin1.push_back('0');
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin1.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             else if (a1<=1)
+//             {
+//                 // cout<<"here new fg\n";
+//                 bin1.push_back('0');
+//                 bin1.push_back('0');
+//                 bin1.push_back('0');
+//                 if (a1>0)
+//                 {
+                    
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin1.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else
+//                 {
+//                     bin1.push_back('0');
+//                 }
+//             }
+//             else
+//             {
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin1.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             if (c1[1]>='A' && c1[1]<='F')
+//             {
+//                 a1=(c1[1]-'0')-55;
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin1.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             else
+//             {
+//                 a1=(c1[1]-'0');
+//                 if (a1<8 && a1>3)
+//                 {
+//                     bin1.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin1.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=3 && a1>1)
+//                 {
+//                     bin1.push_back('0');
+//                     bin1.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin1.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=1)
+//                 {
+//                     bin1.push_back('0');
+//                     bin1.push_back('0');
+//                     bin1.push_back('0');
+//                     if (a1>0)
+//                     {
+//                         while (a1>0)
+//                         {
+//                             a2=a1%2;
+//                             bin1.push_back(char(a2));
+//                             a1/=2;
+//                         }
+//                     }
+//                     else
+//                     {
+//                         bin1.push_back('0');
+//                     }
+//                 }
+//                 else
+//                 {cout<<"here the first step\n";
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin1.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//             }
+//             std::sort(bin1.begin(), bin1.end());
+//         }
+// //        ---------------------------------
+//         if (c2[0]>='A' && c2[0]<='F')
+//         {
+//             cout<<"nnnnn\n";
+//             a1=(c2[0]-'0')-55;
+//             a1*=16;
+//             while (a1>0)
+//             {
+//                 a2=a1%2;
+//                 bin2.push_back(char(a2));
+//                 a1/=2;
+//             }
+// //            std::sort(bin2.begin(), bin2.end())
+//             if (c2[1]>='A' && c2[1]<='F')
+//             {
+//                 a1=(c2[1]-'0')-55;
+//                 a1*=16;
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin2.push_back(char(a2));
+//                     a1/=2;
+//                 }
+
+//             }
+//             else
+//             {
+//                 a1=(c2[1]-'0');
+//                 if (a1<8 && a1>3)
+//                 {
+//                     bin2.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin2.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=3 && a1>1)
+//                 {
+//                     bin2.push_back('0');
+//                     bin2.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin2.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=1)
+//                 {
+//                     bin2.push_back('0');
+//                     bin2.push_back('0');
+//                     bin2.push_back('0');
+//                     if (a1>0)
+//                     {
+//                         while (a1>0)
+//                         {
+//                             a2=a1%2;
+//                             bin2.push_back(char(a2));
+//                             a1/=2;
+//                         }
+//                     }
+//                     else
+//                     {
+//                         bin2.push_back('0');
+//                     }
+//                 }
+//                 else
+//                 {
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin2.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//             }
+//             std::sort(bin2.begin(), bin2.end());
+//         }
+//         else
+//         {
+//             cout<<"here flag 1\n";
+//             a1=(c2[0]-'0');
+//             if (a1<8 && a1>3)
+//             {
+//                 bin2.push_back('0');
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin2.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             else if (a1<=3 && a1>1)
+//             {
+//                 bin2.push_back('0');
+//                 bin2.push_back('0');
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin2.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             else if (a1<=1)
+//             {
+//                 bin2.push_back('0');
+//                 bin2.push_back('0');
+//                 bin2.push_back('0');
+//                 if (a1>0)
+//                 {
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin2.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else
+//                 {
+//                     bin2.push_back('0');
+//                 }
+//             }
+//             else
+//             {
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin2.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             if (c2[1]>='A' && c2[1]<='F')
+//             {
+//                 a1=(c2[1]-'0')-55;
+//                 while (a1>0)
+//                 {
+//                     a2=a1%2;
+//                     bin2.push_back(char(a2));
+//                     a1/=2;
+//                 }
+//             }
+//             else
+//             {
+//                 a1=(c2[1]-'0');
+//                 if (a1<8 && a1>3)
+//                 {
+//                     bin2.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin2.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=3 && a1>1)
+//                 {
+//                     bin2.push_back('0');
+//                     bin2.push_back('0');
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin2.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//                 else if (a1<=1)
+//                 {
+//                     bin2.push_back('0');
+//                     bin2.push_back('0');
+//                     bin2.push_back('0');
+//                     if (a1>0)
+//                     {
+//                         while (a1>0)
+//                         {
+//                             a2=a1%2;
+//                             bin2.push_back(char(a2));
+//                             a1/=2;
+//                         }
+//                     }
+//                     else
+//                     {
+//                         bin2.push_back('0');
+//                     }
+//                 }
+//                 else
+//                 {
+//                     while (a1>0)
+//                     {
+//                         a2=a1%2;
+//                         bin2.push_back(char(a2));
+//                         a1/=2;
+//                     }
+//                 }
+//             }
+//             std::sort(bin2.begin(), bin1.end());
+//         }
+//         for (auto &it:bin1)
+//         {
+//             if (it=='1')
+//             {
+//                 it='0';
+//             }
+//             else
+//             {
+//                 it='1';
+//             }
+//         }
+//         for (auto &it:bin2 )
+//         {
+//             if (it=='0')
+//             {
+//                 it='1';
+//             }
+//             else
+//             {
+//                 it='0';
+//             }
+//         }
+//         for (auto &it:bin1)
+//         {
+//             if (it=='0')
+//             {
+//                 it='1';
+//                 break;
+//             }
+//             else
+//             {
+//                 it='0';
+//             }
+//         }
+//         for (auto &it:bin2)
+//         {
+//             if (it=='0')
+//             {
+//                 it='1';
+//                 break;
+//             }
+//             else
+//             {
+//                 it='0';
+//             }
+//         }
+//         a1=0;
+//         a2=0;
+//         for (int i = (bin1.size()-1); i < 0; --i) {
+//             a1+=(bin1[(bin1.size()-1)-i]-'0')* pow(2,i);
+//             a2+=(bin2[(bin1.size()-1)-i]-'0')*pow(2,i);
+//         }
+//         if (bin1[0]=='1')  // converting to negative
+//         {
+//             a1-=128;
+//         }
+//         if (bin2[0]=='1')
+//         {
+//             a2-=128;
+//         }
+//         a3=a1+a2;
+//         if (a3>255 || a3<-256)
+//         {
+//             cout<<"invalid operation!\n";
+//             cout<<"you have exceeded the available limit of addition in the instruction: "<<inst<<"\n";
+//         }
+//         else
+//         {
+//             cout<<"here flag 2\n";
+//             if (a3<0)
+//             {
+//                 ans.push_back('1');
+
+//                 if (a3>=-1)
+//                 {
+//                     for (int i = 0; i < bin1.size()-2; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     a3*=-1;
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=-3)
+//                 {
+//                     for (int i = 0; i < bin1.size()-3; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     a3*=-1;
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=-7)
+//                 {
+//                     for (int i = 0; i < bin1.size()-4; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     a3*=-1;
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=-15)
+//                 {
+//                     for (int i = 0; i < bin1.size()-5; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     a3*=-1;
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=-31)
+//                 {
+//                     for (int i = 0; i < bin1.size()-6; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     a3*=-1;
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3<=-64)
+//                 {
+// //                    ans.push_back('0');
+//                     ans.push_back('0');
+//                     a3*=-1;
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else
+//                 {
+//                     a3*=-1;
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+// //                else
+// //                {
+// //                    a3*=-1;
+// //                    while(a3>0)
+// //                    {
+// //                        ans.push_back((a3%2)+'0');
+// //                        a3/=2;
+// //                    }
+// //                }
+//             }
+//             else
+//             {
+//                 if (a3>=1)
+//                 {
+//                     for (int i = 0; i < bin1.size()-1; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=3)
+//                 {
+//                     for (int i = 0; i < bin1.size()-2; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=7)
+//                 {
+//                     for (int i = 0; i < bin1.size()-3; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=15)
+//                 {
+//                     for (int i = 0; i < bin1.size()-4; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3>=31)
+//                 {
+//                     for (int i = 0; i < bin1.size()-5; ++i) {
+//                         ans.push_back('0');
+//                     }
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else if (a3<=64)
+//                 {
+//                     ans.push_back('0');
+//                     ans.push_back('0');
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//                 else
+//                 {
+//                     ans.push_back('0');
+//                     while(a3>0)
+//                     {
+//                         ans.push_back((a3%2)+'0');
+//                         a3/=2;
+//                     }
+//                 }
+//             }
+//             std::sort(ans.begin(), ans.end());
+//             a1=0;
+//             for (int i = 0; i < 4; ++i)
+//             {
+//                 a1+=(ans[i]-'0')*pow(2,3-i);
+//             }
+//             char arr[]={'A','B','C','D','E','F'};
+//             if (a1>9)
+//             {
+//                 int k=10;
+//                 for (int i = 0; i < 6; ++i)
+//                 {
+//                     if (a1==k)
+//                     {
+//                         c3.push_back(arr[i]);
+//                         break;
+//                     }
+//                     k++;
+//                 }
+//             }
+//             else
+//             {
+//                 c3.push_back(a1+'0');
+//             }
+//             a1=0;
+//             for (int i = 0; i < 4; ++i)
+//             {
+//                 a1+=(ans[i]-'0')*pow(2,3-i);
+//             }
+//             if (a1>9)
+//             {
+//                 int k=10;
+//                 for (int i = 0; i < 6; ++i)
+//                 {
+//                     if (a1==k)
+//                     {
+//                         c3.push_back(arr[i]);
+//                         break;
+//                     }
+//                     k++;
+//                 }
+//             }
+//             else
+//             {
+//                 cout<<"here  flag 3\n";
+//                 c3.push_back(a1+'0');
+//             }
+//             for (auto &it : gistr)
+//             {
+//                 if(thrd==it.first)
+//                 {
+//                     it.second=c3;
+//                 }
+//             }
+
+//         }
+
+//     }
     else if (op=='B')  // if the given register has the same value as in register zero you jump to the given address inst
     {
         string p;
@@ -306,9 +1020,9 @@ int main()
         excution ex(al,mn);
         for(int i=0;i<mn.base_programe.size();i++)
         {
-            ex.run(i);
+            ex.run(i);ex.dis();
             if(i==mn.base_programe.size()-2)break;
         }
-        ex.dis();
+        
     }
 }
